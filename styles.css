@@ -26,8 +26,8 @@ body, .calc-container{
 .number-buttons{
     display: flex;
     flex-wrap: wrap;
-    width: 90px;
-    justify-content: center;
+    width: 75px;
+
 }
 
 .operator-buttons{

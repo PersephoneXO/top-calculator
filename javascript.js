@@ -21,34 +21,65 @@ function divide(num1,num2){
 //end
 
 
-function operate(operator,num1,num2){
-    switch(operator){
+function operate(){
+    let operands=displayValue.split(' ');
+    num1=Number(operands[0]);
+    num2=Number(operands[2]);
+
+    let solution;
+
+    switch(currentOperator){
         case '+':
-            add(num1,num2);
+            solution=add(num1,num2);
             break;
         case '-':
-            subtract(num1,num2);
+            solution=subtract(num1,num2);
             break;
         case '*':
-            multiply(num1,num2);
+            solution=multiply(num1,num2);
             break;
         case '/':
-            divide(num1,num2);
+            solution=divide(num1,num2);
+            if (isNaN(solution)||solution==Infinity){
+                solution="You can't divide by 0 you silly goose";
+            }
             break;
         default:
-            console.log('Invalid Operator!');
+            solution='Error!';
     }
+
+    if (isNaN(solution)){
+        displayValue=solution;
+        currentOperator='';
+        updateDisplay();
+        setTimeout(()=>{
+            clearDisplay();
+        },5000);
+    }
+
+    solution=Number(solution.toFixed(2));
+
+    displayValue=solution;
+    currentOperator='';
+    updateDisplay();
 
 }
 
 
 let displayValue='0';
+let currentOperator='';
 
 function appendNumber(num){
     if(displayValue==='0'){
         displayValue='';
     }
     displayValue+=num;
+    updateDisplay();
+}
+
+function setOperator(operator){
+    currentOperator=operator;
+    displayValue+=" "+operator+" ";
     updateDisplay();
 }
 
@@ -60,8 +91,11 @@ function updateDisplay(){
 
 function clearDisplay(){
     displayValue='';
+    currentOperator=''
     updateDisplay();
 }
+
+
 
 
 const clearButton=document.querySelector('#clear');
