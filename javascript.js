@@ -1,6 +1,7 @@
 let num1;
 let num2;
-let operator=['+','-','*','/'];
+let operator;
+
 
 //basic operation functions
 function add(num1,num2){
@@ -24,11 +25,12 @@ function divide(num1,num2){
 function operate(){
     let operands=displayValue.split(' ');
     num1=Number(operands[0]);
+    operator=operands[1];
     num2=Number(operands[2]);
 
     let solution;
 
-    switch(currentOperator){
+    switch(operator){
         case '+':
             solution=add(num1,num2);
             break;
@@ -50,7 +52,7 @@ function operate(){
 
     if (isNaN(solution)){
         displayValue=solution;
-        currentOperator='';
+        operator='';
         updateDisplay();
         setTimeout(()=>{
             clearDisplay();
@@ -60,26 +62,39 @@ function operate(){
     solution=Number(solution.toFixed(2));
 
     displayValue=solution;
-    currentOperator='';
+    operator='';
     updateDisplay();
 
 }
 
 
 let displayValue='0';
-let currentOperator='';
+//let currentOperator='';
 
 function appendNumber(num){
     if(displayValue==='0'){
         displayValue='';
     }
+
+    if(num=='.'){
+        if (displayValue.indexOf('.')!=-1){
+            updateDisplay();
+        }
+        else{
+            displayValue+=num;
+            updateDisplay();
+        }
+    }
+    else{
     displayValue+=num;
     updateDisplay();
+    }
 }
 
-function setOperator(operator){
-    currentOperator=operator;
-    displayValue+=" "+operator+" ";
+function setOperator(currentOperator){
+    //currentOperator=operator;
+    operator=currentOperator;
+    displayValue+=" "+currentOperator+" ";
     updateDisplay();
 }
 
@@ -91,11 +106,14 @@ function updateDisplay(){
 
 function clearDisplay(){
     displayValue='';
-    currentOperator=''
+    operator=''
     updateDisplay();
 }
 
-
+function backspace(){
+    displayValue=displayValue.slice(0,-1);
+    updateDisplay();
+}
 
 
 const clearButton=document.querySelector('#clear');
