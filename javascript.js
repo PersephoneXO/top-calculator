@@ -120,3 +120,68 @@ const clearButton=document.querySelector('#clear');
 clearButton.addEventListener('click',(event)=>{
     clearDisplay();
 });
+
+
+//keyboard support
+document.body.addEventListener('keydown',(e)=>{
+    let key=e.key;
+    switch(key){
+        case '1':
+            appendNumber(1);
+            break;
+        case '2':
+            appendNumber(2);
+            break;
+        case '3':
+            appendNumber(3);
+            break;
+        case '4':
+            appendNumber(4);
+            break;
+        case '5':
+            appendNumber(5);
+            break;
+        case '6':
+            appendNumber(6);
+            break;
+        case '7':
+            appendNumber(7);
+            break;
+        case '8':
+            appendNumber(8);
+            break;
+        case '9':
+            appendNumber(9);
+            break;
+        case '0':
+            appendNumber(0);
+            break;
+        case '+':
+            setOperator('+')
+            break;
+        case '-':
+            setOperator('-')
+            break;
+        case '*':
+            setOperator('*')
+            break;
+        case '/':
+            setOperator('/')
+            break;
+        case '=':
+            operate();
+            break;
+        case 'Enter':
+            operate();
+            break;
+        case 'Backspace':
+            backspace();
+            break;
+        case '.':
+            appendNumber('.');
+            break;
+        case 'Escape':
+            clearDisplay();
+            break;
+    }
+})
